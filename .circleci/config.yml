@@ -1,1 +1,19 @@
 version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+
+jobs:
+  install-dependencies:
+    docker:
+      - image: mhart/alpine-node:8.5.0
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: ~/app/node_modules
+          override-ci-command: npm install
+      - run: sudo npm install --force
+
+workflows:
+  build-node:
+    jobs:
+      - install-dependencies
