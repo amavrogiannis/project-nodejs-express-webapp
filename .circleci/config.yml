@@ -12,6 +12,7 @@ jobs:
           cache-path: ~/app/node_modules
           override-ci-command: npm install
       - run: npm install --force
+      - run: pwd
 
 workflows:
   build-node:
