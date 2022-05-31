@@ -11,7 +11,7 @@ jobs:
       - node/install-packages:
           cache-path: ~/app/node_modules
           override-ci-command: npm install
-      - run: sudo npm install --force
+      - run: npm install --force
 
 workflows:
   build-node:
