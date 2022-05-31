@@ -12,7 +12,7 @@ jobs:
           cache-path: ~/app/node_modules
           override-ci-command: npm install
       - run: npm install --force
-      - run: npm update --force
+      - run: npm i -g
 
 workflows:
   build-node:
