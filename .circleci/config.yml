@@ -14,6 +14,7 @@ jobs:
             npm install --force \
             npm update --force \
             npm run test
+            npm build
       - run:
           name: Install jFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
