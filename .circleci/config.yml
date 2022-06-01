@@ -17,8 +17,9 @@ jobs:
       - run:
           name: Install jFrog CLI
           command: |
-                  curl -fL https://install-cli.jfrog.io | sh && \
-                  chmod +x jfrog
+            wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key | sudo apt-key add - \
+            echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list; \
+            apt install -y jfrog-cli-v2-jf; 
       - run:
           name: Push to Artifactory
           command: |
