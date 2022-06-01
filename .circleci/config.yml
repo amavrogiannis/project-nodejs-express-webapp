@@ -14,7 +14,7 @@ jobs:
             npm install --force \
             npm update --force \
             npm run
-      - run: tar xvf nodeapp.tar.gz ./*
+      - run: tar xvf nodeapp.tar.gz ./
       - run:
           name: Install jFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
