@@ -15,12 +15,12 @@ jobs:
             npm run test
       - run:
           name: Install jFrog CLI
-          command: curl -fL https://getcli.jfrog.io | sh && chmod +x jfrog
+          command: curl -fL https://getcli.jfrog.io 
       - run:
           name: Push to Artifactory
           command: |
             ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --apikey $JFROG_API_KEY --interactive=false
-            ./jfrog rt u default-npm-remote/ default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
+            ./jfrog rt u "default-npm-remote.js" default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce nodeapp-alexm $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp nodeapp-alexm $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 
