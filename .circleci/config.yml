@@ -16,10 +16,7 @@ jobs:
             npm run test
       - run:
           name: Install jFrog CLI
-          command: |
-            wget -qO - https://releases.jfrog.io/artifactory/jfrog-gpg-public/jfrog_public_gpg.key | apt-key add - \
-            echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | tee -a /etc/apt/sources.list; \
-            apt install -y jfrog-cli-v2-jf; 
+          command: curl -fL https://getcli.jfrog.io | sh
       - run:
           name: Push to Artifactory
           command: |
