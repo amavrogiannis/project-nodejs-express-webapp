@@ -8,7 +8,7 @@ jobs:
       - image: ubuntu:latest
     working_directory: ~/app
     steps:
-      - run: apt-get update -y && apt-get -y install nodejs npm && apt autoclean && apt autoremove
+      - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install wget -y && apt autoclean && apt autoremove
       - checkout
       - run:  | 
             npm install --force \
