@@ -15,8 +15,10 @@ jobs:
             npm run test
       - run:
           name: Install jFrog CLI
-          command: wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog
-            - chmod +x jfrog
+          command: |
+                apt -y install apt-transport-https ca-certificates curl software-properties-common &&\
+                wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog &&\
+                chmod +x jfrog
       - run:
           name: Push to Artifactory
           command: |
