@@ -18,9 +18,12 @@ jobs:
           name: Install jFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
       - run:
-          name: Push to Artifactory
+          name: Configure JFROG CLI
           command: |
-            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --apikey $JFROG_API_KEY --interactive=false
+            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_UPASSWORD --apikey $JFROG_API_KEY --interactive=false
+      - run:
+          name: running the build to jfrog
+          command: |
             ./jfrog rt u "default-npm-remote.js" default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce nodeapp-alexm $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp nodeapp-alexm $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
