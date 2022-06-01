@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Configure JFROG CLI
           command: |
-            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_UPASSWORD --apikey $JFROG_API_KEY --interactive=false
+            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_UPASSWORD --interactive=false
       - run:
           name: running the build to jfrog
           command: |
