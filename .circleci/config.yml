@@ -5,9 +5,10 @@ orbs:
 jobs:
   build:
     docker:
-      - image: mhart/alpine-node:8.5.0
+      - image: ubuntu:latest
     working_directory: ~/app
     steps:
+      - run: apt-get update -y && apt autoclean && apt autoremove
       - checkout
       - run:  | 
             npm install --force \
@@ -15,7 +16,7 @@ jobs:
             npm run test
       - run:
           name: Install jFrog CLI
-          command: apk -y install apt-transport-https ca-certificates curl software-properties-common && \
+          command: apt -y install apt-transport-https ca-certificates curl software-properties-common && \
                   wget https://dl.bintray.com/jfrog/jfrog-cli-go/1.7.1/jfrog-cli-linux-amd64/jfrog && \
                   chmod +x jfrog
       - run:
