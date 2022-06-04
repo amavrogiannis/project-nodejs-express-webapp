@@ -25,7 +25,7 @@ jobs:
       - run:
           name: running the build to jfrog
           command: |
-            ./jfrog rt u app/nodeapp.tar.gz default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
+            ./jfrog rt u ~/app default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce nodeapp-alexm $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp nodeapp-alexm $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 
