@@ -14,9 +14,7 @@ jobs:
             npm install --force \
             npm update --force \
             npm run
-      - run:  |
-            cd .. && tar -zcvf nodeapp.tar.gz app \
-            cd ..
+      - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - run:
           name: Install jFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
@@ -27,6 +25,7 @@ jobs:
       - run:
           name: running the build to jfrog
           command: |
+            cd ..
             ./jfrog rt u app default-npm-remote --build-name=nodeapp-alexm --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce nodeapp-alexm $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp nodeapp-alexm $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
