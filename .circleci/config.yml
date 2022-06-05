@@ -56,5 +56,7 @@ jobs:
 workflows:
   build-node:
     jobs:
-      - build
+      - local_build
+      - container_build
+
 
