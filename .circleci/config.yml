@@ -1,9 +1,10 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
+  artifactory: circleci/artifactory@1.0.0
 
 jobs:
-  build:
+  local_build:
     docker:
       - image: ubuntu:latest
     working_directory: ~/node/app
@@ -17,6 +18,21 @@ jobs:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
+
+
+  container_build: 
+    docker:
+      - image: node:latest
+    working_directory: ~node/app
+    steps:
+      - checkout
+      - artifactory/install
+      - artifactory/configure
+      - artifactory/build-intergration
+
+
+
+    
 
             
 
