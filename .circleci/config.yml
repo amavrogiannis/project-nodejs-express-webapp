@@ -4,38 +4,38 @@ orbs:
   artifactory-orb: jfrog/artifactory-orb@1.0.1
 
 jobs:
-  # local_build:
-  #   docker:
-  #     - image: ubuntu:latest
-  #   working_directory: ~/node/app
-  #   steps:
-  #     - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
-  #     - checkout
-  #     - run:  | 
-  #           npm install --force \
-  #           npm update --force \
-  #           npm run
-  #     - run: cd .. && tar -zcvf nodeapp.tar.gz app
-  #     - store_artifacts:
-  #         path: ~/node/nodeapp.tar.gz
-
-
-  container_build: 
+  local_build:
     docker:
-      - image: node:latest
-    working_directory: ~node/app
+      - image: ubuntu:latest
+    working_directory: ~/node/app
     steps:
+      - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
-      - artifactory/install
-      - artifactory/configure
-      - artifactory/docker-publish:
-          docker-registry: $JFROG_SERVER
-          docker-steps: 
-            - run: docker build -t $DOCKERTAG docker-publish-node
-          docker-tag: >-
-             $JFROG_SERVER/nodeapp:1.0-${CIRCLE_BUILD_NUM}
-          name: Docker Publish Build
-          repository: default-docker-local
+      - run:  | 
+            npm install --force \
+            npm update --force \
+            npm run
+      - run: cd .. && tar -zcvf nodeapp.tar.gz app
+      - store_artifacts:
+          path: ~/node/nodeapp.tar.gz
+
+
+
+    # docker:
+    #   - image: node:latest
+    # working_directory: ~node/app
+    # steps:
+    #   - checkout
+    #   - artifactory/install
+    #   - artifactory/configure
+    #   - artifactory/docker-publish:
+    #       docker-registry: $JFROG_SERVER
+    #       docker-steps: 
+    #         - run: docker build -t $DOCKERTAG docker-publish-node
+    #       docker-tag: >-
+    #          $JFROG_SERVER/nodeapp:1.0-${CIRCLE_BUILD_NUM}
+    #       name: Docker Publish Build
+    #       repository: default-docker-local
 
 
 
@@ -63,7 +63,14 @@ jobs:
 workflows:
   build-node:
     jobs:
-      # - local_build
-      - container_build
+      - local_build
+      - artifactory-orb/docker-publish:
+            docker-registry: $JFROG_SERVER 
+            build-number: ${CIRLCE_BUILD_NUM} 
+            build-name: nodeapp 
+            artifactory-key: $JFROG_API_KEY 
+            artifactory-user: $JFROG_USER 
+            docker-tag: docker-nodeapp:v${CIRLCE_BUILD_NUM} 
+            repository: default-docker-local
 
 
