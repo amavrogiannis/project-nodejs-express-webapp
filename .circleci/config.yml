@@ -4,20 +4,20 @@ orbs:
   artifactory: circleci/artifactory@1.0.0
 
 jobs:
-  local_build:
-    docker:
-      - image: ubuntu:latest
-    working_directory: ~/node/app
-    steps:
-      - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
-      - checkout
-      - run:  | 
-            npm install --force \
-            npm update --force \
-            npm run
-      - run: cd .. && tar -zcvf nodeapp.tar.gz app
-      - store_artifacts:
-          path: ~/node/nodeapp.tar.gz
+  # local_build:
+  #   docker:
+  #     - image: ubuntu:latest
+  #   working_directory: ~/node/app
+  #   steps:
+  #     - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
+  #     - checkout
+  #     - run:  | 
+  #           npm install --force \
+  #           npm update --force \
+  #           npm run
+  #     - run: cd .. && tar -zcvf nodeapp.tar.gz app
+  #     - store_artifacts:
+  #         path: ~/node/nodeapp.tar.gz
 
 
   container_build: 
@@ -63,7 +63,7 @@ jobs:
 workflows:
   build-node:
     jobs:
-      - local_build
+      # - local_build
       - container_build
 
 
