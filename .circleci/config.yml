@@ -18,6 +18,7 @@ jobs:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
+      - artifactory-orb/install
       - artifactory-orb/configure:
           artifactory-key: JFROG_API_KEY 
           artifactory-url: ARTIFACTORY_URL 
