@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
-  artifactory: circleci/artifactory@1.0.0
+  artifactory-orb: jfrog/artifactory-orb@1.0.1
 
 jobs:
   # local_build:
