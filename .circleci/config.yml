@@ -28,7 +28,14 @@ jobs:
       - checkout
       - artifactory/install
       - artifactory/configure
-      - artifactory/build-intergration
+      - artifactory/docker-publish:
+          docker-registry: $JFROG_SERVER
+          docker-steps: 
+            - run: docker build -t $DOCKERTAG docker-publish-node
+          docker-tag: >-
+             $JFROG_SERVER/nodeapp:1.0-${CIRCLE_BUILD_NUM}
+          name: Docker Publish Build
+          repository: default-docker-local
 
 
 
