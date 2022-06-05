@@ -16,10 +16,9 @@ jobs:
             npm run
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
-          path: ~/node/app
-          destination: artifact-file
-      - store_artifacts:
-          path: ~/node/app
+          path: ~/node/nodeapp.tar.gz
+          destination: node_artifacts
+
             
 
 
