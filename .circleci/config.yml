@@ -18,7 +18,6 @@ jobs:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
-      - artifactory-orb/install
       - artifactory-orb/configure:
           artifactory-key: JFROG_API_KEY 
           artifactory-url: ARTIFACTORY_URL 
@@ -70,8 +69,14 @@ workflows:
     jobs:
       - local_build
       - artifactory-orb/upload:
+          requires: 
+            - local_build
+          build-integration: true 
+          include-env: true 
+          include-git: true 
           build-name: nodeapp 
           docker: node:latest 
           source: ~/node/app 
+          target: default-npm-local/ 
 
 
