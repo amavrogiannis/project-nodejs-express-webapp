@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
-  artifactory-orb: jfrog/artifactory-orb@1.0.1
+  # artifactory-orb: jfrog/artifactory-orb@1.0.1
 
 jobs:
   local_build:
@@ -64,13 +64,5 @@ workflows:
   build-node:
     jobs:
       - local_build
-      - artifactory-orb/docker-publish:
-            docker-registry: $JFROG_SERVER 
-            build-number: ${CIRLCE_BUILD_NUM} 
-            build-name: nodeapp 
-            artifactory-key: $JFROG_API_KEY 
-            artifactory-user: $JFROG_USER 
-            docker-tag: docker-nodeapp:v${CIRLCE_BUILD_NUM} 
-            repository: default-docker-local
 
 
