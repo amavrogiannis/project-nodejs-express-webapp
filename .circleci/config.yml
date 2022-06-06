@@ -33,9 +33,14 @@ jobs:
       - run: 
           name: Setup Registry
           command: npm config set registry $JFROG_URL
-      - run: 
-          name: Authenticate
-          command: echo $'_auth=$NPM_TOKEN \nemail = alex.mavrogiannis@gmail.com \nalways-auth = true' > .npmrc
+      - npm-config/set-registry: 
+          registry-prurl: $JFROG_URL
+          email: $JFROG_USER
+          scope: $JFROG_SCOPE
+          auth-token: $NPM_TOKEN
+      # - run: 
+      #     name: Authenticate
+      #     command: echo $'_auth=$NPM_TOKEN \nemail = alex.mavrogiannis@gmail.com \nalways-auth = true' > .npmrc
 
       - run: 
           name: deploy the build
