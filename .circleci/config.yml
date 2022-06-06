@@ -19,7 +19,7 @@ jobs:
           name: Run nodejs test
           command: npm run test
       - store_test_results:
-          path: test-results
+          path: ~/node/
     
   uploading_artifacts:
     docker:
