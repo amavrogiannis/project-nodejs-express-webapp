@@ -35,6 +35,8 @@ jobs:
           name: Setup Registry
           command: npm config set registry $JFROG_URL
       - npm-config/set-registry: 
+          registry-prurl: $JFROG_URL
+          scope: $JFROG_SCOPE
           email: $JFROG_USER
           auth-token: $NPM_TOKEN
       # - run: 
