@@ -13,6 +13,7 @@ jobs:
     #  - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
       - run:  | 
+            sudo chown -R $USER /usr/local/lib/node_modules
             npm install mocha -g \
             sudo npm install --force \
             sudo npm update --force
