@@ -12,6 +12,7 @@ jobs:
       - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
       - run:  | 
+            npm install mocha -g
             npm install --force \
             npm update --force
       - run: 
@@ -24,6 +25,7 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
+      - checkout
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
