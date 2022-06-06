@@ -36,7 +36,7 @@ jobs:
           command: npm config set registry $JFROG_URL
       - run: 
           name: Authenticate
-          command: echo $'@<SCOPE>:registry=https://alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:_password=${JF_PASS}\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:username=alex.mavrogiannis@gmail.com\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:email=alex.mavrogiannis@gmail.com\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:always-auth=true'
+          command: echo $'@<SCOPE>:registry=https://alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:_password=${JF_PASS}\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:username=alex.mavrogiannis@gmail.com\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:email=alex.mavrogiannis@gmail.com\n//alexmdevops.jfrog.io/artifactory/api/npm/default-npm-local/:always-auth=true' > $(pwd)/.npmrc
 
       # - run: 
       #     name: Authenticate
