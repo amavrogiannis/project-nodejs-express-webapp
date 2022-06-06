@@ -33,16 +33,25 @@ jobs:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
-      - run:
-          name: Install jFrog CLI
-          command: curl -fL https://getcli.jfrog.io | sh
-      - run:
-          name: Configure JFROG CLI
-          command: |
-            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_API_KEY --interactive=false --enc-password=false --basic-auth-only=true
+      # - run:
+      #     name: Install jFrog CLI
+      #     command: curl -fL https://getcli.jfrog.io | sh
       - run: 
-          name: Upload artifacts to JFROG
-          command: ./jfrog rt u app/ default-npm-local
+          name: Setup Registry
+          command: npm config set registry $JFROG_URL
+
+      - run: 
+          name: deploy the build
+          command: npm publish
+
+
+      # - run:
+      #     name: Configure JFROG CLI
+      #     command: |
+      #       ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_API_KEY --interactive=false --enc-password=false --basic-auth-only=true
+      # - run: 
+      #     name: Upload artifacts to JFROG
+      #     command: ./jfrog rt u app/ default-npm-local
 
 
 
