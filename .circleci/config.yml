@@ -82,7 +82,6 @@ workflows:
           include-env: true 
           include-git: true 
           build-name: nodeapp 
-          docker: node:latest 
           source: ~/node/app 
           target: default-npm-local/ 
 
