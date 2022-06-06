@@ -12,9 +12,11 @@ jobs:
     steps:
     #  - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
+      - run:
+          name: enabling permissions for npm 
+          command: mkdir -p /usr/local/lib/node_modules && sudo chown -R $USER /usr/local/lib/node_modules
       - run:  | 
             npm install mocha -g \
-            sudo chown -R $USER /usr/local/lib/node_modules
             sudo npm install --force \
             sudo npm update --force
       - run: 
