@@ -3,42 +3,39 @@ orbs:
   node: circleci/node@5.0.2
   artifactory-orb: jfrog/artifactory-orb@1.0.1
 
-jobs:
-  local_build:
+defaults: &defaults
     docker:
- #     - image: ubuntu:latest
       - image: circleci/node:10
     working_directory: ~/node/app
+
+jobs:
+  local_build:
+    <<: *defaults
     steps:
-    #  - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
-      # - run:
-      #     name: enabling permissions for npm 
-      #     command: mkdir -p /usr/local/lib/node_modules/ && chown -R $USER /usr/local/lib/node_modules
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
       - run:  | 
             sudo npm install --force \
             sudo npm update --force
-    
-  # uploading_artifacts:
-  #   docker:
-  #     - image: circleci/node:10
-  #   working_directory: ~/node/app
-  #   steps:
-  #     - checkout
-  #     - run: 
-  #         name: install dependencies
-  #         command: |
-  #           npm install --force \
-  #           npm update --force
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
-      # - run:
-      #     name: Install jFrog CLI
-      #     command: curl -fL https://getcli.jfrog.io | sh
+
       - run: 
           name: Setup Registry
           command: npm config set registry $JFROG_URL
+      - run: 
+          name: Authenticate
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/
 
       - run: 
           name: deploy the build
