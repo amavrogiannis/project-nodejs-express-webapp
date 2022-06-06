@@ -6,13 +6,14 @@ orbs:
 jobs:
   local_build:
     docker:
-      - image: ubuntu:latest
+ #     - image: ubuntu:latest
+      - image: circleci/node:10
     working_directory: ~/node/app
     steps:
-      - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
+    #  - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
       - run:  | 
-            npm install mocha -g
+            npm install mocha -g \
             npm install --force \
             npm update --force
       - run: 
@@ -26,6 +27,11 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
+      - run: 
+          name: install dependencies
+          command: |
+            npm install --force \
+            npm update --force
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
@@ -36,10 +42,9 @@ jobs:
           name: Configure JFROG CLI
           command: |
             ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_API_KEY --interactive=false --enc-password=false --basic-auth-only=true
-      # - artifactory-orb/configure:
-      #     artifactory-key: JFROG_API_KEY 
-      #     artifactory-url: ARTIFACTORY_URL 
-      #     artifactory-user: JFROG_USER 
+      - run: 
+          name: Upload artifacts to JFROG
+          command: ./jfrog rt u app/ default-npm-local
 
 
 
