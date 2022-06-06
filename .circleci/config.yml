@@ -14,7 +14,14 @@ jobs:
       - run:  | 
             npm install --force \
             npm update --force \
-            npm run
+            npm run test
+      - store_test_results:
+          path: test-results
+    
+  uploading_artifacts:
+    docker:
+      - image: circleci/node:10
+    steps:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
@@ -75,14 +82,9 @@ workflows:
   build-node:
     jobs:
       - local_build
-      - artifactory-orb/upload:
-          requires: 
+      - uploading_artifacts:
+          type: approval
+          requires:
             - local_build
-          build-integration: true 
-          include-env: true 
-          include-git: true 
-          build-name: nodeapp 
-          source: ~/node/app 
-          target: default-npm-local/ 
 
 
