@@ -18,6 +18,9 @@ jobs:
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
+      - run:
+          name: Install jFrog CLI
+          command: curl -fL https://getcli.jfrog.io | sh
       - artifactory-orb/configure:
           artifactory-key: JFROG_API_KEY 
           artifactory-url: ARTIFACTORY_URL 
