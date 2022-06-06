@@ -14,8 +14,8 @@ jobs:
       - checkout
       - run:  | 
             npm install mocha -g \
-            npm install --force \
-            npm update --force
+            sudo npm install --force \
+            sudo npm update --force
       - run: 
           name: Run nodejs test
           command: npm run test
