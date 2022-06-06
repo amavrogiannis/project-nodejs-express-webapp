@@ -14,7 +14,7 @@ jobs:
       - checkout
       - run:
           name: enabling permissions for npm 
-          command: mkdir /usr/local/lib/node_modules/ && sudo chown -R $USER /usr/local/lib/node_modules
+          command: mkdir -p /usr/local/lib/node_modules/ && sudo chown -R $USER /usr/local/lib/node_modules
       - run:  | 
             npm install mocha -g \
             sudo npm install --force \
