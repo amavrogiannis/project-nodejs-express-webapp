@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Configure JFROG CLI
           command: |
-            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $JFROG_USER --password $JFROG_API_KEY --interactive=false --enc-password=false --basic-auth-only=true
+            ./jfrog config add $JFROG_SERVER --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_API_KEY --interactive=false --enc-password=false --basic-auth-only=true
       # - artifactory-orb/configure:
       #     artifactory-key: JFROG_API_KEY 
       #     artifactory-url: ARTIFACTORY_URL 
