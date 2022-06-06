@@ -18,7 +18,6 @@ jobs:
       - run:  | 
             sudo npm install --force \
             sudo npm update --force
-      - run: curl -u ${JFROG_USER}:${JFROG_UPASSWORD} https://alexmdevops.jfrog.io/artifactory/default-npm-local/
     
   # uploading_artifacts:
   #   docker:
