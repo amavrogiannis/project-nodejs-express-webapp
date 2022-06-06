@@ -12,9 +12,9 @@ jobs:
     steps:
     #  - run: apt-get update -y && apt-get -y install nodejs npm && apt-get install curl -y && apt autoclean && apt autoremove
       - checkout
-      - run:
-          name: enabling permissions for npm 
-          command: mkdir -p /usr/local/lib/node_modules/ && chown -R $USER /usr/local/lib/node_modules
+      # - run:
+      #     name: enabling permissions for npm 
+      #     command: mkdir -p /usr/local/lib/node_modules/ && chown -R $USER /usr/local/lib/node_modules
       - run:  | 
             sudo npm install --force \
             sudo npm update --force
