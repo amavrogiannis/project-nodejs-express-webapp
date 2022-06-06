@@ -19,17 +19,17 @@ jobs:
             sudo npm install --force \
             sudo npm update --force
     
-  uploading_artifacts:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/node/app
-    steps:
-      - checkout
-      - run: 
-          name: install dependencies
-          command: |
-            npm install --force \
-            npm update --force
+  # uploading_artifacts:
+  #   docker:
+  #     - image: circleci/node:10
+  #   working_directory: ~/node/app
+  #   steps:
+  #     - checkout
+  #     - run: 
+  #         name: install dependencies
+  #         command: |
+  #           npm install --force \
+  #           npm update --force
       - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
           path: ~/node/nodeapp.tar.gz
@@ -89,9 +89,9 @@ workflows:
   build-node:
     jobs:
       - local_build
-      - uploading_artifacts:
-          type: approval
-          requires:
-            - local_build
+      # - uploading_artifacts:
+      #     type: approval
+      #     requires:
+      #       - local_build
 
 
