@@ -37,8 +37,9 @@ jobs:
       - npm-private-publish:
           registry: $JFROG_URL
           usertoken: $NPM_TOKEN
-      # - run: 
-      #     name: Authenticate
+      - run: 
+          name: Authenticate
+          command: npm config set '_auth' "${NPM_TOKEN}"
       #     command: echo $'_auth = ${NPM_TOKEN}\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
 
       - run: 
