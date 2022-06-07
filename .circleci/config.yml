@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
   artifactory-orb: jfrog/artifactory-orb@1.0.1
-  npm-private-publish: creditsense/npm-private-publish@1.14.0
 
 defaults: &defaults
     docker:
@@ -34,9 +33,6 @@ jobs:
       - run: 
           name: Setup Registry
           command: npm config set registry $JFROG_URL
-      - npm-private-publish:
-          registry: $JFROG_URL
-          usertoken: $NPM_TOKEN
       - run: 
           name: Authenticate
           command: npm config set '_auth' "${NPM_TOKEN}"
