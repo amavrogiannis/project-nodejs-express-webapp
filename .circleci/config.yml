@@ -14,10 +14,10 @@ jobs:
     steps:
       - checkout
       
-      # - run: 
-      #     name: Authenticate
-      # #     command: npm config set '_auth' "${NPM_TOKEN}"
-      #     command: echo $'_auth = ${NPM_TOKEN}\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
+      - run: 
+          name: Authenticate
+      #     command: npm config set '_auth' "${NPM_TOKEN}"
+          command: touch .npmrc && echo $'_auth = ${NPM_TOKEN}\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
 
       - restore_cache:
           keys:
