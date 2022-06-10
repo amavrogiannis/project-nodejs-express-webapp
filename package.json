@@ -1,8 +1,9 @@
 {
   "name": "nodejs-webapp-express",
-  "version": "0.0.1",
+  "version": "timestamp",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "deploy": "git add -A; timestamp=$(date \"+%s\")"
   },
   "description": "nodejs-webapp-express",
   "author": {
