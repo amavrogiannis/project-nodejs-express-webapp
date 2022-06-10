@@ -1,6 +1,6 @@
 {
   "name": "nodejs-webapp-express",
-  "version": "${CIRCLE_BUILD_NUM}",
+  "version": "0.0.2",
   "scripts": {
     "start": "node app"
   },
