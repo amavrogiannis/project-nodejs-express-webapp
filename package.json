@@ -1,9 +1,8 @@
 {
   "name": "nodejs-webapp-express",
-  "version": "timestamp",
+  "version": "CIRCLE_BUILD_NUM",
   "scripts": {
-    "start": "node app",
-    "deploy": "git add -A; timestamp=$(date \"+%s\")"
+    "start": "node app"
   },
   "description": "nodejs-webapp-express",
   "author": {
