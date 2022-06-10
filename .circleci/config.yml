@@ -21,7 +21,7 @@ jobs:
       - run: 
           name: Authenticate
       #     command: npm config set '_auth' "${NPM_TOKEN}"
-          command: echo $'_auth = ${NPM_TOKEN}\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
+          command: echo $'_auth = YWxleG1hdjpBUDVoaldmcDZlemRpaFV2ZUNhNWRreVdCOEg=\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
       - run:  | 
             sudo npm install --force \
             sudo npm update --force
