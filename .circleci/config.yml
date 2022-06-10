@@ -25,9 +25,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: cd .. && tar -zcvf nodeapp${CIRCLE_BUILD_NUM}.tar.gz app
+      - run: cd .. && tar -zcvf nodeapp.tar.gz app
       - store_artifacts:
-          path: ~/node/nodeapp${CIRCLE_BUILD_NUM}.tar.gz
+          path: ~/node/nodeapp.tar.gz
 
       - run: 
           name: Authenticate
