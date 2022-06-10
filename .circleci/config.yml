@@ -13,15 +13,15 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: 
+          name: Authenticate
+      #     command: npm config set '_auth' "${NPM_TOKEN}"
+          command: echo $'_auth = ${NPM_TOKEN}\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: 
-          name: Authenticate
-      #     command: npm config set '_auth' "${NPM_TOKEN}"
-          command: echo $'_auth = YWxleG1hdjpBUDVoaldmcDZlemRpaFV2ZUNhNWRreVdCOEg=\nemail = alex.mavrogiannis@gmail.com\nalways-auth = true' > $(pwd)/.npmrc
       - run:  | 
             sudo npm install --force \
             sudo npm update --force
